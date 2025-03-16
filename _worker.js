@@ -260,7 +260,7 @@ async function handleTCPOutBound(remoteSocket, addressRemote, portRemote, rawCli
 		const tcpSocket = connect({
 			hostname: address,
 			port: port,
-		},{ secureTransport: "on" });
+		});
 		remoteSocket.value = tcpSocket;
 		log(`connected to ${address}:${port}`);
 		const writer = tcpSocket.writable.getWriter();
