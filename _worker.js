@@ -257,10 +257,11 @@ async function handleTCPOutBound(remoteSocket, addressRemote, portRemote, rawCli
 	 */
 	async function connectAndWrite(address, port) {
 		/** @type {import("@cloudflare/workers-types").Socket} */
-		const tcpSocket = connect({
+		const socket = connect({
 			hostname: address,
 			port: port,
-		});
+		},{ secureTransport: "starttls" });
+		const tcpSocket = socket.startTls();
 		remoteSocket.value = tcpSocket;
 		log(`connected to ${address}:${port}`);
 		const writer = tcpSocket.writable.getWriter();
